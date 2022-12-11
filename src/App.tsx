@@ -1,4 +1,7 @@
+import { Container, Flex, Box, Text } from '@chakra-ui/react';
+import AutoComplete from 'react-google-autocomplete';
 import React, { useEffect, useState } from 'react';
+import './App.css';
 
 type CoOrdinateProps = {
   lat: number;
@@ -39,10 +42,31 @@ function App() {
       })
   }
   return (
-    <div>
-      {city}
-      {weather}
-    </div>
+    <Container w={"full"} h="full" alignItems={"center"} justifyContent="center">
+      <Flex fontFamily={"monospace"} direction={"column"}>
+
+        Have a great day! Weather App
+        <Text fontFamily={"monospace"} fontSize="9xl" data-testId="weather">{weather} &#176; c</Text>
+        <Text fontFamily={"monospace"} fontSize="3xl">{city}</Text>
+        <Box fontFamily={"monospace"} border={"1px"} padding="2">
+          <AutoComplete
+            className='AutoComplete'
+            apiKey={"AIzaSyDt_i7_mJ0RhPZUTTF2L38jaewS8fU77dg"}
+            onPlaceSelected={(place) => {
+              var latitude = place.geometry.location.lat();
+              var longitude = place.geometry.location.lng();
+              setCoords({
+                lat: latitude,
+                lng: longitude
+              })
+              updateWeather();
+            }}
+          />
+
+        </Box>
+
+      </Flex>
+    </Container>
   );
 }
 
