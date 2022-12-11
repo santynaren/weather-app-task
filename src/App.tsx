@@ -26,7 +26,7 @@ function App() {
   })
   const updateLocation = () => {
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&result_type=administrative_area_level_3&key=AIzaSyDt_i7_mJ0RhPZUTTF2L38jaewS8fU77dg`)
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coords.lat},${coords.lng}&result_type=administrative_area_level_3&key=${process.env.REACT_APP_AUTOCOMPLETE_API}`)
       .then((res) => res.json())
       .then((json) => {
         setCity(json.results[0].formatted_address)
@@ -51,7 +51,7 @@ function App() {
         <Box fontFamily={"monospace"} border={"1px"} padding="2">
           <AutoComplete
             className='AutoComplete'
-            apiKey={"AIzaSyDt_i7_mJ0RhPZUTTF2L38jaewS8fU77dg"}
+            apiKey={process.env.REACT_APP_AUTOCOMPLETE_API}
             onPlaceSelected={(place) => {
               var latitude = place.geometry.location.lat();
               var longitude = place.geometry.location.lng();
