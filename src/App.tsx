@@ -6,6 +6,7 @@ type CoOrdinateProps = {
 }
 function App() {
   const [coords, setCoords] = useState<CoOrdinateProps>({ lat: 0, lng: 0 })
+  const [weather, setWeatherDetails] = useState<string>("");
   const [city, setCity] = useState<string>("");
   useEffect(() => {
     // Following gets the lat lng for the user location
@@ -18,6 +19,7 @@ function App() {
   }, [])
   useEffect(() => {
     updateLocation();
+    updateWeather();
   })
   const updateLocation = () => {
     fetch(
@@ -28,9 +30,20 @@ function App() {
         setCity(json.results[0].formatted_address)
       })
   }
+  const updateWeather = () => {
+    // we can get forecast and also the area locality
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lng}&appid=1510748ac25b198ecae2f95bd9acc5d6`)
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json)
+        setWeatherDetails((json.main.temp - 273.15).toFixed(0))
+      })
+  }
   return (
     <div>
-{city}
+      {city}
+      {weather}
     </div>
   );
 }
