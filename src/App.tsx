@@ -46,8 +46,8 @@ function App() {
       <Flex fontFamily={"monospace"} direction={"column"}>
 
         Have a great day! Weather App
-        <Text fontFamily={"monospace"} fontSize="9xl" data-testId="weather">{weather} &#176; c</Text>
-        <Text fontFamily={"monospace"} fontSize="3xl">{city}</Text>
+        <Text fontFamily={"monospace"} fontSize="9xl" data-testid="weather">{weather} &#176; c</Text>
+        <Text fontFamily={"monospace"} fontSize="3xl" data-testid="city">{city}</Text>
         <Box fontFamily={"monospace"} border={"1px"} padding="2">
           <AutoComplete
             className='AutoComplete'
